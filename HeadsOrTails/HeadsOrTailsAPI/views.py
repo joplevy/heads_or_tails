@@ -10,12 +10,6 @@ def sign_up_in(request):
 			username = request.POST.get('username', False)
 			password = request.POST.get('password', False)
 			user = authenticate(username=username, password=password)
-			# if not form.is_valid():
-			# 	args={
-			# 	'sign_up_form': UserCreationForm(),
-			# 	'sign_in_form': form,
-			# 	}
-			# 	return render(request, "login.html", args)
 			if user is not None and user.is_active:
 				login(request, user)
 				return redirect('home')
@@ -28,7 +22,7 @@ def sign_up_in(request):
 			form = UserCreationForm(request.POST)
 			if form.is_valid():
 				form.save()
-				return redirect('')
+				return redirect('login')
 			args={
 			'sign_up_form': form,
 			'sign_in_form': AuthenticationForm(),
