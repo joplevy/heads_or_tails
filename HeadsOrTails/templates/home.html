@@ -1,7 +1,44 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
-
 {% block content %}
-  <h2>Home</h2>
+            <div class="grid-x grid-margin-x">
+                <div class="cell small-12">
+                    <h2>Available games</h2>
+                </div>
+                <div class="cell small-12">
+                    <table class="stack hover">
+                        <thead>
+                            <tr>
+                                <th width="50%">Game Name</th>
+                                <th width="25%">Game Description</th>
+                                <th width="25%">Action available</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Game name</td>
+                                <td>This is the game description.</td>
+                                <td><a href="{% url 'game' %}" class="button primary"><span class="fas fa-play"></span> Play !</a>
+                                <a href="#" class="button quaternary" data-tooltip tabindex="1" title="Modify"><span class="fas fa-cog"></span></a>
+                                <a href="#" class="button secondary" data-tooltip tabindex="1" title="Delete"><span class="far fa-trash-alt"></span></a></td>
+                            </tr>
+                            <tr>
+                                <td>Game name</td>
+                                <td>This is the game description.</td>
+                                <td><a href="{% url 'game' %}" class="button primary"><span class="fas fa-play"></span> Play !</a>
+                                <a href="#" class="button quaternary" data-tooltip tabindex="1" title="Modify"><span class="fas fa-cog"></span></a>
+                                <a href="#" class="button secondary" data-tooltip tabindex="1" title="Delete"><span class="far fa-trash-alt"></span></a></td>
+                            </tr>
+                            <tr>
+                                <td>Game name</td>
+                                <td>This is the game description.</td>
+                                <td><a href="{% url 'game' %}" class="button primary"><span class="fas fa-play"></span> Play !</a>
+                                <a href="#" class="button quaternary" data-tooltip tabindex="1" title="Modify"><span class="fas fa-cog"></span></a>
+                                <a href="#" class="button secondary" data-tooltip tabindex="1" title="Delete"><span class="far fa-trash-alt"></span></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="button tertiary">Create a new game</a>
+                </div>
+            </div>
 {% endblock %}

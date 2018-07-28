@@ -1,12 +1,59 @@
 {% extends 'base.html' %}
-
-{% block title %}Login{% endblock %}
+{% load static %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-12 medium-6 align-center v-align-middle">
+        <img src="{% static "img/coin.png" %}" alt="Heads or Tails" width="256px" class="logo">
+    </div>
+    <div class="cell small-12 medium-6 v-align-middle log-cards">
+        <ul class="tabs" data-tabs id="connexion-tabs">
+            <li class="tabs-title {%if not sign_up_form.errors %}is-active{%endif%}"><a href="#login" aria-selected="true" data-tabs-target="login">Login</a></li>
+            <li class="tabs-title {%if sign_up_form.errors %}is-active{%endif%}"><a data-tabs-target="register" href="#register">Register</a></li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="connexion-tabs">
+            <div class="tabs-panel  {%if not sign_up_form.errors %}is-active{%endif%}" id="login">
+                  <form method="post">
+                    {% csrf_token %}
+                    {% for error, msg in sign_in_form.errors.items %}
+                       {{ msg }}
+                    {% endfor %}
+                    <!-- {{ sign_in_form.errors }} -->
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell small-12">
+                            <input type="text" name="{{ sign_in_form.username.html_name }}" required placeholder="{{ sign_in_form.username.label }}">
+                        </div>
+                        <div class="cell small-12">
+                        	<input type="password" name="{{ sign_in_form.password.html_name }}" required placeholder="{{ sign_in_form.password.label }}">
+                        </div>
+                        <div class="cell small-12">
+                            <input type="submit"  name="sign_in" placeholder="Login" class="button primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tabs-panel {%if sign_up_form.errors %}is-active{%endif%}" id="register">
+                <form method="post">
+                {% csrf_token %}
+                {{ sign_up_form.errors }}
+                    <!-- {{sign_up_form.as_p}} -->
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell small-12">
+                            <input type="text" required name="{{ sign_up_form.username.html_name }}" placeholder="{{ sign_up_form.username.label }}">
+                        </div>
+                        <div class="cell small-12">
+                            <input type="password" required  name="{{ sign_up_form.password1.html_name }}" placeholder="{{ sign_up_form.password1.label }}">
+                        </div>
+                        <div class="cell small-12">
+                            <input type="password"  name="{{ sign_up_form.password2.html_name }}" placeholder="{{ sign_up_form.password2.label }}"">
+                        </div>
+                        <div class="cell small-12">
+                            <input type="submit" required name="sign_up" placeholder="Register" class="button primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
