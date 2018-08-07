@@ -4,39 +4,41 @@
             <div class="grid-x grid-margin-x">
                 <div class="cell small-12 medium-6 medium-offset-3">
                     <div class="card">
-                        <div class="grid-x grid-padding-x align-center">
-                            <form method="post">{% csrf_token %}
-                                <!--{{ form.as_p }} -->
-                                <div class="cell small-12">
-                                    <label for="title">Title</label>
-                                    <input id="title" type="text">
-                                </div>
-                                <div class="cell small-6">
-                                    <input type="radio" name="bet" id="heads">
-                                    <label for="heads">Heads</label>
-                                </div>
-                                <div class="cell small-6">
-                                    <input type="radio" name="bet" id="tails">
-                                    <label for="tails">Tails</label>
-                                </div>
-                                <div class="cell small-8">
-                                    <label for="value">Value</label>
-                                    <input id="value" type="number">
-                                </div>
-                                <div class="cell small-4">
-                                    <label for="unit">Unit</label>
-                                    <select name="" id="unit">
-                                        <option value="gwei">GWEI</option>
-                                        <option value="phinney">PHINNEY</option>
-                                        <option value="ether">ETHER</option>
-                                    </select>
-                                </div>
-                                <div class="cell small-12">
-                                    <label for="private">Key</label>
-                                    <input id="private" type="password">
-                                </div>
-                                <input type="submit" class="button primary" value="Play" />
-                            </form>
+                        <div class="grid-container fluid">
+                            <div class="grid-x grid-padding-x align-center">
+                                <form method="post">{% csrf_token %}
+                                    <!--{{ form.as_p }} -->
+                                    <div class="cell small-12">
+                                        <label for="title">Title</label>
+                                        <input id="title" type="text">
+                                    </div>
+                                    <div class="cell small-6">
+                                        <input type="radio" name="bet" id="heads">
+                                        <label for="heads">Heads</label>
+                                    </div>
+                                    <div class="cell small-6">
+                                        <input type="radio" name="bet" id="tails">
+                                        <label for="tails">Tails</label>
+                                    </div>
+                                    <div class="cell small-8">
+                                        <label for="value">Value</label>
+                                        <input id="value" type="number">
+                                    </div>
+                                    <div class="cell small-4">
+                                        <label for="unit">Unit</label>
+                                        <select name="" id="unit">
+                                            <option value="gwei">GWEI</option>
+                                            <option value="phinney">PHINNEY</option>
+                                            <option value="ether">ETHER</option>
+                                        </select>
+                                    </div>
+                                    <div class="cell small-12">
+                                        <label for="private">Key</label>
+                                        <input id="private" type="password">
+                                    </div>
+                                    <input type="submit" class="button primary" value="Play" />
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
