@@ -1,0 +1,7 @@
+link new game with ether
+create game form
+link ether conversions
+create play game page
+link play game with ether
+create delete contract
+delete contract on joinGame

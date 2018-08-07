@@ -2,6 +2,45 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import redirect
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
+from django.urls import reverse
+from django.db import models
+from django import forms
+
+from HeadsOrTailsAPI.models import Game
+
+class GameForm(forms.ModelForm):
+	class Meta:
+		model = Game
+		fields = ['title', 'head', 'value']
+	# title = forms.CharField()
+	key = forms.CharField()
+	# head = forms.BooleanField()
+	# value = forms.IntegerField()
+
+class GameList(ListView):
+	model = Game
+	ordering = ['-id']
+
+class GameCreate(CreateView):
+	model = Game
+	form_class = GameForm
+	# fields = ['title', 'head', 'value']
+
+	def get_success_url(self):
+		print("shouldbe after")
+		# self.request.session['success_message'] = 'Everything is fine'
+		return reverse('games')	
+
+	def form_valid(self, form):
+		form.instance.author = self.request.user
+		print(form.instance.title)
+		if(form.instance.title == "toto"):
+			# print(form.instance.key)
+			# form.add_error("custom", "toto error")
+			return super().form_invalid(form)
+		return super().form_valid(form)
 
 def sign_up_in(request):
 	if request.method == "POST":
