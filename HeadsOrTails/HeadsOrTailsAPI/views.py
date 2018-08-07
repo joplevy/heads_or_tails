@@ -10,12 +10,20 @@ from django import forms
 
 from HeadsOrTailsAPI.models import Game
 
+ETHER_UNIT = (
+    ('W', 'wei'),
+    ('G', 'gwei'),
+    ('F', 'finney'),
+    ('E', 'ether'),
+)
+
 class GameForm(forms.ModelForm):
 	class Meta:
 		model = Game
 		fields = ['title', 'head', 'value']
 	# title = forms.CharField()
 	key = forms.CharField()
+	unit = forms.ChoiceField(choices=ETHER_UNIT, initial='W')
 	# head = forms.BooleanField()
 	# value = forms.IntegerField()
 

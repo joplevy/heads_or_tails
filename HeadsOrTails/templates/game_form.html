@@ -5,7 +5,7 @@
                 <div class="cell small-12 medium-6 medium-offset-3 align-center">
                     <div class="card">
                         <form method="post">{% csrf_token %}
-                            <!-- {{ form.as_p }} -->
+                            {{ form.as_p }}
                             <input type="submit" class="button primary" value="Play" />
                         </form>
                     </div>
