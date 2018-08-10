@@ -2,6 +2,11 @@
 
 {% block content %}
             <div class="grid-x grid-margin-x">
+                {% if user.is_authenticated %}
+                <div class="cell small">
+                    <a href="{% url 'game-add' %}" class="button tertiary">Create a new game</a>
+                </div>
+                {% endif %}
                 <div class="cell small-12">
                     <h2>Available games</h2>
                 </div>
@@ -10,47 +15,34 @@
                         <thead>
                             <tr>
                                 <th width="30%">Game Name</th>
-                                <th width="20%">Value</th>
-                                <th width="25%">Bet</th>
-                                <th width="25%">Action available</th>
+                                <th width="25%">Stake</th>
+                                <th width="15%">Bet</th>
+                                <th width="15%">State</th>
+                                <th width="15%">Action available</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for game in object_list %}
                                 <tr>
                                     <td>{{ game.title }} by {{game.author}}</td>
-                                    <td>{{ game.value }}</td>
+                                    <td>{{ game.get_value_unit }}</td>
                                     <td>{% if game.head %} HEAD {% else %} TAIL {% endif %}</td>
-                                    <td><a href="{% url 'game' %}" class="button primary"><span class="fas fa-play"></span> Play !</a>
-                                    <!-- <a href="#" class="button quaternary" data-tooltip tabindex="1" title="Modify"><span class="fas fa-cog"></span></a> -->
-                                    {% if user == game.author %}
-                                    <a href="#" class="button secondary" data-tooltip tabindex="1" title="Delete"><span class="far fa-trash-alt"></span></a></td>
+                                    <td>{% if not game.p2 %} PENDING 
+                                        {% elif game.author == user and game.author_won == True or game.p2 == user and game.author_won == False %}
+                                        WON
+                                        {% else %}
+                                        LOST
+                                        {% endif %}</td>
+                                    <td>
+                                    {% if not game.p2 %}
+                                    <a href="{{ game.get_absolute_url}}" class="button primary"><span class="fas fa-play"></span> Play !</a>
+                                    {% elif user == game.author %}
+                                    <a href="{% url 'game-delete' pk=game.pk %}" class="button secondary" data-tooltip tabindex="1" title="Delete"><span class="far fa-trash-alt"></span></a></td>
                                     {% endif %}
                                 </tr>
                             {% empty %}
                                 <tr>No games yet.</tr>
                             {% endfor %}
-                            <!-- <tr>
-                                <td>Game name</td>
-                                <td>This is the game description.</td>
-                                <td><a href="{% url 'game' %}" class="button primary"><span class="fas fa-play"></span> Play !</a>
-                                <a href="#" class="button quaternary" data-tooltip tabindex="1" title="Modify"><span class="fas fa-cog"></span></a>
-                                <a href="#" class="button secondary" data-tooltip tabindex="1" title="Delete"><span class="far fa-trash-alt"></span></a></td>
-                            </tr>
-                            <tr>
-                                <td>Game name</td>
-                                <td>This is the game description.</td>
-                                <td><a href="{% url 'game' %}" class="button primary"><span class="fas fa-play"></span> Play !</a>
-                                <a href="#" class="button quaternary" data-tooltip tabindex="1" title="Modify"><span class="fas fa-cog"></span></a>
-                                <a href="#" class="button secondary" data-tooltip tabindex="1" title="Delete"><span class="far fa-trash-alt"></span></a></td>
-                            </tr>
-                            <tr>
-                                <td>Game name</td>
-                                <td>This is the game description.</td>
-                                <td><a href="{% url 'game' %}" class="button primary"><span class="fas fa-play"></span> Play !</a>
-                                <a href="#" class="button quaternary" data-tooltip tabindex="1" title="Modify"><span class="fas fa-cog"></span></a>
-                                <a href="#" class="button secondary" data-tooltip tabindex="1" title="Delete"><span class="far fa-trash-alt"></span></a></td>
-                            </tr> -->
                         </tbody>
                     </table>
                     {% if user.is_authenticated %}

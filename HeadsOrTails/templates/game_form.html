@@ -3,43 +3,45 @@
 {% block content %}
             <div class="grid-x grid-margin-x">
                 <div class="cell small-12 medium-6 medium-offset-3">
-                    <div class="card">
-                        <div class="grid-container fluid">
-                            <div class="grid-x grid-padding-x align-center">
-                                <form method="post">{% csrf_token %}
-                                    <!--{{ form.as_p }} -->
+                    <div class="card  padding-top">
+                        <form method="post">{% csrf_token %}
+                            <div class="grid-container fluid">
+                                <div class="grid-x grid-padding-x align-center">
+                                    {% for error, msg in form.errors.items %}
+                                    {{ msg }}
+                                    {% endfor %}
                                     <div class="cell small-12">
-                                        <label for="title">Title</label>
-                                        <input id="title" type="text">
+                                        <!-- <label for="title">Title</label> -->
+                                        <input required id="title" name="{{ form.title.html_name }}" value="{{form.title.value}}" placeholder="{{ form.title.label }}" type="text">
                                     </div>
                                     <div class="cell small-6">
-                                        <input type="radio" name="bet" id="heads">
+                                        <input type="radio" name="{{ form.head.html_name }}" id="heads" checked value="true">
                                         <label for="heads">Heads</label>
                                     </div>
                                     <div class="cell small-6">
-                                        <input type="radio" name="bet" id="tails">
+                                        <input type="radio" name="{{ form.head.html_name }}" id="tails" value="false">
                                         <label for="tails">Tails</label>
                                     </div>
-                                    <div class="cell small-8">
-                                        <label for="value">Value</label>
-                                        <input id="value" type="number">
+                                    <div class="cell small-6 medium-8">
+                                        <!-- <label for="value">Value</label> -->
+                                        <input required id="value" name="{{ form.value.html_name }}" placeholder="{{ form.value.label }}"  type="number">
                                     </div>
-                                    <div class="cell small-4">
-                                        <label for="unit">Unit</label>
-                                        <select name="" id="unit">
-                                            <option value="gwei">GWEI</option>
-                                            <option value="phinney">PHINNEY</option>
-                                            <option value="ether">ETHER</option>
+                                    <div class="cell small-6 medium-4">
+                                        <!-- <label for="unit">Unit</label> -->
+                                        <select name="{{ form.unit.html_name }}" id="unit">
+                                            {% for value, display_name in form.unit.field.choices %}
+                                                <option value="{{value}}">{{display_name}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="cell small-12">
-                                        <label for="private">Key</label>
-                                        <input id="private" type="password">
+                                        <label for="private">Please enter your account private key, it won't be saved</label>
+                                        <input required id="private" name="{{ form.key.html_name }}" placeholder="{{ form.key.label }}" type="password">
                                     </div>
                                     <input type="submit" class="button primary" value="Play" />
-                                </form>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

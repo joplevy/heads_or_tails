@@ -18,7 +18,6 @@
                     {% for error, msg in sign_in_form.errors.items %}
                        {{ msg }}
                     {% endfor %}
-                    <!-- {{ sign_in_form.errors }} -->
                     <div class="grid-x grid-margin-x">
                         <div class="cell small-12">
                             <input type="text" name="{{ sign_in_form.username.html_name }}" required placeholder="{{ sign_in_form.username.label }}">
@@ -36,7 +35,6 @@
                 <form method="post">
                 {% csrf_token %}
                 {{ sign_up_form.errors }}
-                    <!-- {{sign_up_form.as_p}} -->
                     <div class="grid-x grid-margin-x">
                         <div class="cell small-12">
                             <input type="text" required name="{{ sign_up_form.username.html_name }}" placeholder="{{ sign_up_form.username.label }}">
@@ -45,7 +43,7 @@
                             <input type="password" required  name="{{ sign_up_form.password1.html_name }}" placeholder="{{ sign_up_form.password1.label }}">
                         </div>
                         <div class="cell small-12">
-                            <input type="password"  name="{{ sign_up_form.password2.html_name }}" placeholder="{{ sign_up_form.password2.label }}"">
+                            <input type="password"  name="{{ sign_up_form.password2.html_name }}" placeholder="{{ sign_up_form.password2.label }}">
                         </div>
                         <div class="cell small-12">
                             <input type="submit" required name="sign_up" placeholder="Register" class="button primary">
